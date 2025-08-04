@@ -6,9 +6,14 @@
 
 <img src="../images/genie_01.png"><br><br>
 
-# 02. Crie o database
-``` sql
-USE CATALOG jessyca_demos;
+2. Configure o Genie
+    - Defina o nome do Genie Space como `Assistente de Vendas`
+    - Selecione seu SQL Warehouse
+    - Selecione as seguintes tabelas:
+        - tb_vendas
+        - tb_estoque
+        - dim_medicamento
+        - dim_loja
+    - Clique em `Save`
 
-CREATE DATABASE IF NOT EXISTS genie_workshop;
-
+<img src="../images/genie_02.png" width=800>
