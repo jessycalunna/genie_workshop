@@ -4,7 +4,7 @@
 
 1. No menu principal (à esquerda), clique em `New` > `Genie space`
 
-<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/genie_01.png"><br><br>
+<img src="../images/genie_01.png"><br><br>
 
 # 02. Crie o database
 ``` sql
