@@ -167,7 +167,9 @@ CREATE OR REPLACE FUNCTION calc_lucro(medicamento STRING)
 ```
 
 3. Adicione esta função a sua Genie
+<img src="../images/genie_13.png">
+<img src="../images/genie_14.png">
 
-4. Faça novamente a pergunta anterior
+5. Faça novamente a pergunta anterior
 
 Pronto! Com isso, conseguimos calcular o lucro médio do nosso produto!
