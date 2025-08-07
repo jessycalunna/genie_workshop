@@ -49,3 +49,6 @@ Faça a seguinte pergunta:
 - Qual o valor total de venda por loja? Exiba o nome da loja
 
 Note que, apesar de o Genie identificar as tabelas que utilizaria para trazer esse resultado, ele não foi capaz de responder à pergunta. Por quê?
+
+1. No menu `Catalog` > `<nome-do-catalogo>` > `<nome-do-schema>` > `dim_loja`, verifique o nome da coluna que apresenta o nome da loja
+<img src="../images/genie_10.png">
