@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/Databricks-BR/genie_ai_bi/main/images/header_genie.png">
+<img src="../images/header.jpg">
 
 # 01. Criar o Genie Space
 
@@ -23,7 +23,6 @@
 Com o Genie Space preparado, podemos começar a fazer nossas análises!
 
 Basta usar o chat para fazer as perguntas abaixo:
-
 - Qual o faturamento em out/22?
 - Agora, quebre por produto
 - Mantenha somente os 10 produtos com maior faturamento
@@ -33,3 +32,20 @@ Basta usar o chat para fazer as perguntas abaixo:
 - Quais produtos tiveram uma proporção de vendas por estoque maior que 0.8 em Outubro de 2022?
 
 <img src="../images/genie_05.png"><br><br>
+
+Note que, mesmo com muito pouco contexto, a Genie já conseguiu:
+- Inferir quais as tabelas e colunas relevantes para responder nossas perguntas
+- Aplicar filtros e agregações
+- Responder perguntas adicionais sobre uma resposta anterior
+- Entender como utilizar jargões
+- Combinar diferentes tabelas
+- Calcular métricas derivadas
+
+Aproveite para explorar e fazer perguntas adicionais!
+
+# 04. Usando Comentários
+
+Faça a seguinte pergunta:
+- Qual o valor total de venda por loja? Exiba o nome da loja
+
+Note que, apesar de o Genie identificar as tabelas que utilizaria para trazer esse resultado, ele não foi capaz de responder à pergunta. Por quê?
