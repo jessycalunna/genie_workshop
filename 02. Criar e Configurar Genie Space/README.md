@@ -17,7 +17,18 @@
 
 # 02. Configure o Genie
 
-1. Defina o nome do Genie Space com um nome que considere adequado para a execução dos exercícios
+No menu de configuração do Genie temos várias opções, abaixo detalho um pouco do que pode ser feito.
+
+<img src="../images/genie_17.png" width=800>
+
+1. Defina um nome mais acurado para a sua sala Genie
+2. Clique em `Configure`
+3. Clique em `Settings`
+4. Aqui você pode definir qual SQL Warehouse será utilizado. Esse será o ambiente onde as queries que o Genie monta serão executadas.
+5. No menu de `Description` podemos adicionar um texto para que os futuros usuários que forem usar essa sala saibam do que se trata e o que podem perguntar.
+6. No `Genie file upload` podemos dar a liberdade para que os usuários que interajam com a sala Genie possam fazer upload de arquivos CSV/Excel para serem contemplados por essa sala.
+7. Aqui podemos definir perguntas de exemplo para aparecerem quando um novo chat Genie for iniciado por um usuário.
+8. O botão de `Save` salva as alterações realizadas
 
 # 03. Faça perguntas para o Genie
 
