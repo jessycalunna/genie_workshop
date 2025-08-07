@@ -13,14 +13,11 @@
         - dim_loja
 3. Clique em `Create`
 
-<img src="../images/genie_16.png">
+<img src="../images/genie_16.png" width=400>
 
 # 02. Configure o Genie
 
 1. Defina o nome do Genie Space com um nome que considere adequado para a execução dos exercícios
-
-
-
 
 # 03. Faça perguntas para o Genie
 
