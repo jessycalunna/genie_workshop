@@ -51,12 +51,12 @@ No menu de compartilhamento do Espaço Genie é possível adicionar usuários ou
 | Modificar permissões                         | Não            | Não              | Não         | Sim            |
 | Excluir a sala                               | Não            | Não              | Não         | Sim            |
 | Visualizar conversas de outros usuários      | Não            | Não              | Não         | Sim            |
-> ℹ️ *Informações adicionadas em agosto de 2025. Para mais detalhes e possíveis atualizações, consulte a [Documentação Oficial](https://learn.microsoft.com/en-us/azure/databricks/security/auth/access-control/#genie-space).*
+> *Para mais detalhes e possíveis atualizações, consulte a [Documentação Oficial](https://learn.microsoft.com/en-us/azure/databricks/security/auth/access-control/#genie-space).*
 
 4. Defina se deseja enviar um e-mail para esses usuários informando a adição dos mesmos ao espaço Genie
 5. Clique em `Add` para salvar as alterações
 
-# 04. Faça perguntas para o Genie
+# 04. Faça perguntas para o seu espaço Genie
 
 Com o Genie Space preparado, podemos começar a fazer nossas análises!
 
@@ -81,7 +81,7 @@ Note que, mesmo com muito pouco contexto, a Genie já conseguiu:
 
 Aproveite para explorar e fazer perguntas adicionais!
 
-# 04. Usando Comentários
+# 05. Usando Comentários
 
 Faça a seguinte pergunta:
 > Qual o valor total de venda por loja? Exiba o nome da loja
@@ -107,7 +107,7 @@ Perceba que dessa vez o Genie utilizou a coluna correta que contém o nome da lo
 
 No entanto, nossa consulta ainda não retornou nenhum resultado. Vamos buscar uma solução!
 
-# 05. Usando Chaves Primárias
+# 06. Usando Chaves Primárias e Estrangeiras
 
 Aparentemente, a coluna **id_loja** da tabela **dim_loja** não é o melhor campo para fazer os cruzamentos com a tabela de vendas. Na verdade, a coluna correta é a **cod**!
 
@@ -128,7 +128,7 @@ ALTER TABLE tb_vendas ADD CONSTRAINT fk_venda_dim_loja FOREIGN KEY (id_loja) REF
 
 Pronto! Com essa informação a Genie já consegue responder a pergunta corretamente!
 
-# 06. Usando Instruções
+# 07. Usando Instruções
 
 Como vimos, a Genie utiliza toda a documentação das tabelas para conseguir responder perguntas. No entanto, por motivos de segurança, ela não tem acesso aos dados em si!
 
@@ -150,7 +150,7 @@ Vamos ver como funciona:
 
 <img src="../images/genie_11.png">
 
-# 07. Usando Exemplos de Query
+# 08. Usando Exemplos de Query
 
 Em alguns casos, precisamos fazer cruzamentos e cálculos bastante complexos para conseguir responder às nossas perguntas e a Genie pode não entender como montar todo o racional necessário.
 
@@ -176,7 +176,7 @@ SELECT window.end AS dt_venda, SUM(vl_venda) FROM vendas GROUP BY WINDOW(dt_vend
 
 Note que agora a Genie conseguiu responder bem melhor a nossa pergunta!
 
-## 07.1. Usando Parâmetros nos Exemplos de Query
+## 08.1. Usando Parâmetros nos Exemplos de Query
 
 Também é possível utilizar **parâmetros dinâmicos** nas queries criadas no Genie. Essa funcionalidade permite definir partes variáveis da consulta, que serão preenchidas automaticamente no momento da execução com base na pergunta do usuário.
 
@@ -199,22 +199,23 @@ ORDER BY mes;
 
 <img src="../images/genie_19.png">
 
-# 07. Usando Funções
-Outro recurso que podemos utilizar para ajudar a Genie com cálculos complexos são as funções!
+# 09. Usando Funções
 
-**Funções** permitem guardarmos e parametrizar lógicas complexas dentro do nosso catálogo para serem reutilizadas por outras pessoas e/ou outras consultas de forma simples – inclusive fora da Genie. 
+Outro recurso que pode ser utilizado para ajudar o Genie com **cálculos complexos** é o uso de **funções SQL definidas pelo usuário**. As **funções** permitem encapsular lógicas complexas de forma parametrizada, facilitando sua reutilização por outras pessoas e consultas, inclusive fora do Genie. Elas são especialmente úteis para garantir que o Genie utilize regras de negócio padronizadas e aprovadas pela organização.
 
-No nosso contexto, as funções também vão funcionar como ferramentas validades e certificadas pelos times responsáveis que a Genie pode decidir utilizar nas suas respostas.
+O Databricks trata as funções como **ativos gerenciáveis**, o que significa que elas governadas como qualquer outro objeto do catálogo. Sendo possível definir permissões para restringir quem pode utilizá-las e reaproveitá-las em Consultas SQL, Dashboards, Modelos, Espaços Genie, Pipelines de dados, etc.
 
-Vamos ver na prática:
+## Exemplo prático
 
-1. Faça a pergunta:
+1. Faça a seguinte pergunta ao Genie:
 > Qual o lucro projetado do AAS?
-Apesar de ter uma resposta, não está de acordo com as regras internas da empresa, por exemplo a porcentagem de lucro para produtos genéricos ou não genéricos
+2. O Genie pode tentar responder, mas provavelmente não seguirá as regras internas da empresa — por exemplo, a margem de lucro diferenciada para medicamentos genéricos e não genéricos.
+3. Para resolver isso, podemos criar uma **função que calcula o lucro projetado de um medicamento** com base na regra oficial de negócio, e disponibilizá-la para o Genie utilizar.
 
-2. Como não temos informações suficientes na nossa base para responder à essa pergunta podemos criar a função abaixo com a lógica do cálculo do lucro médio projetado de um produto
-3. A criação de uma função no Databricks acontece a nível de catálogo
+## 09.1. Criando funções no Databricks
 
+1. No menu lateral esquerdo, clique em `SQL Editor`
+2. Crie a função com a lógica de negócio
 ``` sql
 CREATE OR REPLACE FUNCTION calc_lucro(medicamento STRING)
   RETURNS TABLE(nome_medicamento STRING, lucro_projetado DOUBLE)
@@ -229,11 +230,41 @@ CREATE OR REPLACE FUNCTION calc_lucro(medicamento STRING)
     WHERE m.nome_medicamento = calc_lucro.medicamento
     GROUP BY ALL
 ```
+## 09.2. Adicionando a função ao Genie
 
-3. Adicione esta função a sua Genie
-<img src="../images/genie_13.png">
-<img src="../images/genie_14.png">
+1. No menu `SQL Queries`, clique em `Add` > `SQL Function`
+<img src="../images/genie_13.png" width=400>
 
-5. Faça novamente a pergunta anterior
+3. Selecione a função recém-criada `calc_lucro`
+<img src="../images/genie_14.png" width=400>
 
-Pronto! Com isso, conseguimos calcular o lucro médio do nosso produto!
+5. Faça novamente a pergunta ao Genie:
+> Qual o lucro projetado do AAS?
+
+Perceba que agora o Genie foi capaz de utilizar a função `calc_lucro` e responder com base na lógica certificada, garantindo alinhamento com as regras internas da empresa.
+
+# 10. Monitoramento
+
+Durante toda a interação com o espaço Genie, você deve ter percebido que, logo abaixo de cada resposta gerada, aparecem as opções: `Yes`, `Fix It` e `Request Review`.
+
+<img src="../images/genie_20.png">
+
+Essas opções são fundamentais para o processo de **melhoria contínua do espaço Genie**. Elas permitem que os usuários forneçam feedbacks valiosos e que os administradores acompanhem, ajustem e otimizem as instruções e respostas geradas.
+
+### Como cada opção funciona
+
+- **Yes**  
+  Indica que a resposta gerada atendeu corretamente à pergunta.  
+  O Genie registra esse feedback como positivo e passa a reutilizar a resposta em futuras interações com perguntas semelhantes feitas por outros usuários.
+
+- **Fix It**  
+  Permite que o próprio usuário adicione mais detalhes, reformule a pergunta ou melhore a resposta.  
+  A interação original será enviada aos administradores, que poderão utilizar esse contexto para **adicionar novas instruções, ajustar consultas ou melhorar o comportamento do espaço** com base no seu feedback.
+
+- **Request Review**  
+  Abre uma solicitação formal para que o administrador revise a resposta gerada.  
+  Essa opção é ideal quando o usuário não sabe exatamente o que está errado, mas identifica que a resposta não está adequada. O administrador poderá analisar o caso, corrigir a lógica e retornar com uma solução melhor.
+
+Essas funcionalidades são extremamente importantes tanto na fase de **validação inicial** do espaço Genie quanto em sua **manutenção contínua**. Elas garantem que o espaço evolua de forma colaborativa, com base na experiência real dos usuários.
+
+*ℹ️
