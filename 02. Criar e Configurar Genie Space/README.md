@@ -101,3 +101,75 @@ Vamos ver como funciona:
     - `* para calcular indicadores sobre prescrição use categoria_regulatoria <> 'GENÉRICO'`
 
 <img src="../images/genie_11.png">
+
+# 05. Usando Exemplos de Query
+
+Em alguns casos, precisamos fazer cruzamentos e cálculos bastante complexos para conseguir responder às nossas perguntas e a Genie pode não entender como montar todo o racional necessário.
+
+Nesses casos, podemos fornecer exemplos de queries validadas e certificadas pelos times responsáveis. Este também é um mecanismo interessante para garantir a acurácia das respostas.
+
+Vamos ver como funciona:
+
+1. Faça a pergunta:
+    - Calcule a quantidade de itens vendidos por janela móvel de 3 meses 
+
+2. Aqui a Genie já até fez uma soma em janela móvel, porém não ficou exatamente do jeito que nós gostaríamos. Então, adicione um exemplo de query seguindo os passos abaixo:
+    - Clique em `Configure` > `SQL Queries`
+    - Clique em `Add`
+    - Insira a pergunta anterior no campo superior
+    - Insira a query abaixo no campo inferior
+        - `SELECT window.end AS dt_venda, SUM(vl_venda) FROM vendas GROUP BY WINDOW(dt_venda, '90 days', '1 day')`
+
+<img src="../images/genie_08.png">
+
+3. Faça novamente a pergunta anterior
+
+Notem que agora a Genie conseguiu responder corretamente a nossa pergunta!
+
+4. Também é possível usar parâmetros nas queries criadas
+```sql
+SELECT l.nlj, MONTH(v.dt_venda) AS mes, SUM(v.vl_venda) as total_vendido
+FROM tb_vendas v
+JOIN dim_loja l ON v.id_loja = l.cod
+WHERE l.nlj = :nome_loja
+GROUP BY l.nlj, MONTH(v.dt_venda)
+ORDER BY mes;
+```
+Utilize a pergunta `Quero ver as vendas mensais da loja 34006` para montar a query
+
+# 06. Usando Funções
+Outro recurso que podemos utilizar para ajudar a Genie com cálculos complexos são as funções!
+
+**Funções** permitem guardarmos e parametrizar lógicas complexas dentro do nosso catálogo para serem reutilizadas por outras pessoas e/ou outras consultas de forma simples – inclusive fora da Genie. 
+
+No nosso contexto, as funções também vão funcionar como ferramentas validades e certificadas pelos times responsáveis que a Genie pode decidir utilizar nas suas respostas.
+
+Vamos ver na prática:
+
+1. Faça a pergunta:
+    - Qual o lucro projetado do AAS?
+
+2. Realmente, não temos informações suficientes na nossa base para responder à essa pergunta! Para isso, crie a função abaixo com a lógica do cálculo do lucro médio projetado de um produto:
+
+``` sql
+CREATE OR REPLACE FUNCTION calc_lucro(medicamento STRING)
+  RETURNS TABLE(nome_medicamento STRING, lucro_projetado DOUBLE)
+  COMMENT 'Use esta função para calcular o lucro projetado de um medicamento'
+  RETURN 
+    SELECT
+      m.nome_medicamento,
+      sum(case when m.categoria_regulatoria == 'GENÉRICO' then 1 else 0.5 end * v.vl_venda) / sum(v.qt_venda) as lucro_projetado
+    FROM vendas v
+    LEFT JOIN dim_medicamento m
+    ON v.id_produto = m.id_produto
+    WHERE m.nome_medicamento = calc_lucro.medicamento
+    GROUP BY ALL
+```
+
+3. Adicione esta função a sua Genie
+
+<img src="https://raw.githubusercontent.com/Databricks-BR/genie_ai_bi/main/images/genie_09.png">
+
+4. Faça novamente a pergunta anterior
+
+Pronto! Com isso, conseguimos calcular o lucro médio do nosso produto!
