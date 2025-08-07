@@ -17,20 +17,43 @@
 
 # 02. Configure o Genie
 
-No menu de configuração do Genie temos várias opções, abaixo detalho um pouco do que pode ser feito.
+No menu de configurações do Genie temos várias opções, abaixo detalho um pouco do que pode ser feito *(opcional)*.
 
 <img src="../images/genie_17.png" width=800>
 
-1. Defina um nome mais acurado para a sua sala Genie
+1. Escolha um nome apropriado para a sua sala Genie  
+   Defina um nome que reflita com precisão o objetivo ou o conteúdo da sala.
 2. Clique em `Configure`
 3. Clique em `Settings`
-4. Aqui você pode definir qual SQL Warehouse será utilizado. Esse será o ambiente onde as queries que o Genie monta serão executadas.
-5. No menu de `Description` podemos adicionar um texto para que os futuros usuários que forem usar essa sala saibam do que se trata e o que podem perguntar.
-6. No `Genie file upload` podemos dar a liberdade para que os usuários que interajam com a sala Genie possam fazer upload de arquivos CSV/Excel para serem contemplados por essa sala.
-7. Aqui podemos definir perguntas de exemplo para aparecerem quando um novo chat Genie for iniciado por um usuário.
-8. O botão de `Save` salva as alterações realizadas
+4. Configure o SQL Warehouse - Escolha qual *SQL Warehouse* será utilizado. Esse será o ambiente onde as queries geradas pelo Genie serão executadas.
+5. Adicione uma descrição - No campo `Description`, insira um texto explicativo para orientar futuros usuários sobre o propósito da sala e os tipos de perguntas que podem ser feitas.
+6. Permita upload de arquivos -  No campo `Genie file upload`, você pode habilitar a opção para que os usuários façam upload de arquivos CSV ou Excel. Esses arquivos poderão ser utilizados nas análises dentro da sala.
+7. Defina perguntas de exemplo - Aqui você pode configurar perguntas iniciais que serão exibidas automaticamente quando um novo chat for iniciado. Isso ajuda a guiar os usuários sobre como interagir com o Genie.
+8. Clique em `Save` para salvar as alterações - Todas as configurações realizadas só serão aplicadas após salvar.
 
-# 03. Faça perguntas para o Genie
+# 03. Permissões da Sala Genie
+
+No menu de compartilhamento do Espaço Genie é possível adicionar usuários ou grupos e definir permissões com os seguintes passos:
+1. Clique em `Share`
+2. Adicione usuários/grupos
+3. Defina qual tipo de permissão esse usuário terá, elas são:
+| Ação                                         | Sem permissão  | Pode visualizar / executar  | Pode editar | Pode gerenciar |
+|----------------------------------------------|----------------|-----------------------------|-------------|----------------|
+| Aparece na lista de salas Genie              | Não            | Sim                         | Sim         | Sim            |
+| Fazer perguntas ao Genie                     | Não            | Sim                         | Sim         | Sim            |
+| Fornecer feedback à resposta                 | Não            | Sim                         | Sim         | Sim            |
+| Adicionar ou editar instruções               | Não            | Não                         | Sim         | Sim            |
+| Adicionar ou editar perguntas de exemplo     | Não            | Não                         | Sim         | Sim            |
+| Adicionar ou remover tabelas incluídas       | Não            | Não                         | Sim         | Sim            |
+| Monitorar uma sala                           | Não            | Não                         | Não         | Sim            |
+| Modificar permissões                         | Não            | Não                         | Não         | Sim            |
+| Excluir a sala                               | Não            | Não                         | Não         | Sim            |
+| Visualizar conversas de outros usuários      | Não            | Não                         | Não         | Sim            |
+
+
+5. Defina se deseja enviar um e-mail para esses usuários informando a adição dos mesmos ao espaço Genie 
+
+# 04. Faça perguntas para o Genie
 
 Com o Genie Space preparado, podemos começar a fazer nossas análises!
 
