@@ -1,4 +1,4 @@
-<img src="../images/header.jpg">
+<img src="images/header.jpg">
 
 Workshop de funcionalidades do Databricks Genie.
 
