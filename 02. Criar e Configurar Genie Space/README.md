@@ -7,14 +7,14 @@
 <img src="../images/genie_01.png"><br><br>
 
 # 02. Configure o Genie
-    - Defina o nome do Genie Space como `Assistente de Vendas` ou um nome que considere adequado para a execução do Hands-On
-    - Selecione seu SQL Warehouse
-    - Selecione as seguintes tabelas:
+
+1. Defina o nome do Genie Space com um nome que considere adequado para a execução dos exercícios
+2. Selecione as tabelas criadas
         - tb_vendas
         - tb_estoque
         - dim_medicamento
         - dim_loja
-    - Clique em `Save`
+3. Clique em `Save`
 
 <img src="../images/genie_02.png" width=800>
 
