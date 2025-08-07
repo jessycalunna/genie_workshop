@@ -159,7 +159,7 @@ CREATE OR REPLACE FUNCTION calc_lucro(medicamento STRING)
     SELECT
       m.nome_medicamento,
       sum(case when m.categoria_regulatoria == 'GENÉRICO' then 1 else 0.5 end * v.vl_venda) / sum(v.qt_venda) as lucro_projetado
-    FROM vendas v
+    FROM tb_vendas v
     LEFT JOIN dim_medicamento m
     ON v.id_produto = m.id_produto
     WHERE m.nome_medicamento = calc_lucro.medicamento
@@ -167,8 +167,6 @@ CREATE OR REPLACE FUNCTION calc_lucro(medicamento STRING)
 ```
 
 3. Adicione esta função a sua Genie
-
-<img src="https://raw.githubusercontent.com/Databricks-BR/genie_ai_bi/main/images/genie_09.png">
 
 4. Faça novamente a pergunta anterior
 
