@@ -267,4 +267,4 @@ Essas opções são fundamentais para o processo de **melhoria contínua do espa
 
 Essas funcionalidades são extremamente importantes tanto na fase de **validação inicial** do espaço Genie quanto em sua **manutenção contínua**. Elas garantem que o espaço evolua de forma colaborativa, com base na experiência real dos usuários.
 
-*ℹ️ Informações atualizadas em Agosto de 2025. Em caso de atualizações verifique a [Documentação Oficial|https://learn.microsoft.com/en-us/azure/databricks/genie/set-up].*
+ℹ️ *Informações atualizadas em Agosto de 2025. Para acompanhar as atualizações em tempo real, verifique a [Documentação Oficial](https://learn.microsoft.com/en-us/azure/databricks/genie/set-up).*
