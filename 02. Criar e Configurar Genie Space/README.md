@@ -89,7 +89,7 @@ Faça a seguinte pergunta:
 Note que, apesar de o Genie identificar as tabelas que utilizaria para trazer esse resultado, ele não foi capaz de responder à pergunta de forma correta. Por quê?
 
 No menu `Catalog` > `<nome-do-catalogo>` > `<nome-do-schema>` > `dim_loja`, verifique o nome da coluna que apresenta o nome da loja
-<img src="../images/genie_10.png">
+<img src="../images/genie_10.png" width=300>
 
 A coluna que contém o nome da loja não está com uma nomenclatura adequada para que o Genie consiga se basear por ela. Vamos adicionar um comentário nessa coluna para que seja possível utilizar a coluna correta para apresentar a informação pedida.
 1. Acesse o `SQL Editor`
@@ -166,24 +166,38 @@ Vamos ver como funciona:
     - Clique em `Add`
     - Insira a pergunta anterior no campo superior
     - Insira a query abaixo no campo inferior
-        - `SELECT window.end AS dt_venda, SUM(vl_venda) FROM vendas GROUP BY WINDOW(dt_venda, '90 days', '1 day')`
+```sql
+SELECT window.end AS dt_venda, SUM(vl_venda) FROM vendas GROUP BY WINDOW(dt_venda, '90 days', '1 day')
+```
 
 <img src="../images/genie_12.png">
 
 3. Faça novamente a pergunta anterior
 
-Notem que agora a Genie conseguiu responder bem melhor a nossa pergunta!
+Note que agora a Genie conseguiu responder bem melhor a nossa pergunta!
 
-4. Também é possível usar parâmetros nas queries criadas
+## 07.1. Usando Parâmetros nos Exemplos de Query
+
+Também é possível utilizar **parâmetros dinâmicos** nas queries criadas no Genie. Essa funcionalidade permite definir partes variáveis da consulta, que serão preenchidas automaticamente no momento da execução com base na pergunta do usuário.
+
+1. Defina o exemplo de pergunta com a pergunta direta
+> Quero ver as vendas mensais da loja 34006
+3. Insira o parâmetro com dois-pontos `:` antes do nome na query definida
+   Por exemplo: `:nome_loja`
+
 ```sql
-SELECT l.nlj, MONTH(v.dt_venda) AS mes, SUM(v.vl_venda) as total_vendido
+SELECT l.nlj, MONTH(v.dt_venda) AS mes, SUM(v.vl_venda) AS total_vendido
 FROM tb_vendas v
 JOIN dim_loja l ON v.id_loja = l.cod
 WHERE l.nlj = :nome_loja
 GROUP BY l.nlj, MONTH(v.dt_venda)
 ORDER BY mes;
 ```
-Utilize a pergunta `Quero ver as vendas mensais da loja 34006` para montar a query
+2. Digite a pergunta no Genie para acionar o preenchimento dinâmico do parâmetro  
+3. O parâmetro será automaticamente detectado pelo Genie  - O valor (`34006`, no exemplo acima) será extraído da pergunta e aplicado na consulta. Ele também aparecerá na interface de configuração, podendo ser ajustado conforme necessário.
+4. Também é possível complementar a instrução de Query `Usage Guidance`. Esse campo permite adicionar explicações e exemplos adicionais que ajudam o Genie a entender **em quais outros contextos** a instrução pode ser aplicada. Você pode incluir variações de perguntas, termos equivalentes ou observações úteis para melhorar a precisão da resposta gerada.
+
+<img src="../images/genie_19.png">
 
 # 07. Usando Funções
 Outro recurso que podemos utilizar para ajudar a Genie com cálculos complexos são as funções!
@@ -195,12 +209,11 @@ No nosso contexto, as funções também vão funcionar como ferramentas validade
 Vamos ver na prática:
 
 1. Faça a pergunta:
-    - Qual o lucro projetado do AAS?
+> Qual o lucro projetado do AAS?
 Apesar de ter uma resposta, não está de acordo com as regras internas da empresa, por exemplo a porcentagem de lucro para produtos genéricos ou não genéricos
-- Adicione essa informação como `Request to Fix`
-- Você também pode melhorar a resposta no `Fix It`
 
-2. Realmente, não temos informações suficientes na nossa base para responder à essa pergunta! Para isso, crie a função abaixo com a lógica do cálculo do lucro médio projetado de um produto:
+2. Como não temos informações suficientes na nossa base para responder à essa pergunta podemos criar a função abaixo com a lógica do cálculo do lucro médio projetado de um produto
+3. A criação de uma função no Databricks acontece a nível de catálogo
 
 ``` sql
 CREATE OR REPLACE FUNCTION calc_lucro(medicamento STRING)
