@@ -6,17 +6,21 @@
 
 <img src="../images/genie_01.png"><br><br>
 
-# 02. Configure o Genie
-
-1. Defina o nome do Genie Space com um nome que considere adequado para a execução dos exercícios
 2. Selecione as tabelas criadas
         - tb_vendas
         - tb_estoque
         - dim_medicamento
         - dim_loja
-3. Clique em `Save`
+3. Clique em `Create`
 
-<img src="../images/genie_02.png" width=800>
+<img src="../images/genie_16.png">
+
+# 02. Configure o Genie
+
+1. Defina o nome do Genie Space com um nome que considere adequado para a execução dos exercícios
+
+
+
 
 # 03. Faça perguntas para o Genie
 
