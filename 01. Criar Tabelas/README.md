@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/Databricks-BR/genie_ai_bi/main/images/header_genie.png">
+<img src="../images/header.jpg">
 
 # 01. Importe os dados para o storage
 
