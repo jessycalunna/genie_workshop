@@ -1,39 +1,25 @@
 <img src="../images/header.jpg">
 
-# 01. Importe os dados para o storage
-
-Importe os arquivos de dados no Container disponível.
-
-# 02. Crie o database
+# 01. Crie um database caso ainda não possua
 ``` sql
 USE CATALOG jessyca_demos;
 
 CREATE DATABASE IF NOT EXISTS genie_workshop;
-
 ```
 
-## 02.1. Crie as tabelas com os arquivos disponíveis
+## 02. Importe os Arquivos
 
-1. Crie a tabela de vendas
-``` sql
-CREATE TABLE jessyca_demos.genie_workshop.tb_vendas
-AS SELECT * FROM parquet.`abfss://jessyca-demos@oneenvadls.dfs.core.windows.net/genie-workshop/dados/vendas.parquet`
-```
-2. Crie a tabela de estoque
-``` sql
-CREATE TABLE jessyca_demos.genie_workshop.tb_estoque
-AS SELECT * FROM parquet.`abfss://jessyca-demos@oneenvadls.dfs.core.windows.net/genie-workshop/dados/estoque.parquet`;
-```
-3. Crie a dimensão de medicamento
-``` sql
-CREATE TABLE jessyca_demos.genie_workshop.dim_medicamento
-AS SELECT * FROM parquet.`abfss://jessyca-demos@oneenvadls.dfs.core.windows.net/genie-workshop/dados/dim_medicamento.parquet`;
-```
-4. Crie a dimensão de loja
-``` sql
-CREATE TABLE jessyca_demos.genie_workshop.dim_loja
-AS SELECT * FROM parquet.`abfss://jessyca-demos@oneenvadls.dfs.core.windows.net/genie-workshop/dados/dim_loja.parquet`;
-```
+1. As informações que serão utilizadas no workshop estão na pasta `/dados` aqui no repositório Github, faça download dos arquivos
+2. No menu `New` > `Add or upload data`
+<img src="../images/lab1_01.png width=400">
+
+3. Selecione `Create or modify table`
+<img src="../images/lab1_02.png widht=400">
+
+4. Selecione os arquivos `.parquet` e os importe como tabelas definindo o catálogo, schema e nome das tabelas a serem utilizadas
+- Os nomes definidos para o workshop foram `tb_vendas`, `tb_estoque`, `dim_medicamento`, `dim_loja`
+<img src="../images/lab01_03.png widht=400">
+
 
 
 
