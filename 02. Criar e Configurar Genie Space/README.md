@@ -34,24 +34,27 @@ No menu de configurações do Genie temos várias opções, abaixo detalho um po
 # 03. Permissões da Sala Genie
 
 No menu de compartilhamento do Espaço Genie é possível adicionar usuários ou grupos e definir permissões com os seguintes passos:
+<img src="../images/genie_18.png" width=400>
 1. Clique em `Share`
 2. Adicione usuários/grupos
 3. Defina qual tipo de permissão esse usuário terá, elas são:
-| Ação                                         | Sem permissão  | Pode visualizar / executar  | Pode editar | Pode gerenciar |
-|----------------------------------------------|----------------|-----------------------------|-------------|----------------|
-| Aparece na lista de salas Genie              | Não            | Sim                         | Sim         | Sim            |
-| Fazer perguntas ao Genie                     | Não            | Sim                         | Sim         | Sim            |
-| Fornecer feedback à resposta                 | Não            | Sim                         | Sim         | Sim            |
-| Adicionar ou editar instruções               | Não            | Não                         | Sim         | Sim            |
-| Adicionar ou editar perguntas de exemplo     | Não            | Não                         | Sim         | Sim            |
-| Adicionar ou remover tabelas incluídas       | Não            | Não                         | Sim         | Sim            |
-| Monitorar uma sala                           | Não            | Não                         | Não         | Sim            |
-| Modificar permissões                         | Não            | Não                         | Não         | Sim            |
-| Excluir a sala                               | Não            | Não                         | Não         | Sim            |
-| Visualizar conversas de outros usuários      | Não            | Não                         | Não         | Sim            |
 
+| Ação                                         | Sem permissão  | CAN VIEW/CAN RUN | CAN EDIT | CAN MANAGE |
+|----------------------------------------------|----------------|------------------|-------------|----------------|
+| Aparece na lista de salas Genie              | Não            | Sim              | Sim         | Sim            |
+| Fazer perguntas ao Genie                     | Não            | Sim              | Sim         | Sim            |
+| Fornecer feedback à resposta                 | Não            | Sim              | Sim         | Sim            |
+| Adicionar ou editar instruções               | Não            | Não              | Sim         | Sim            |
+| Adicionar ou editar perguntas de exemplo     | Não            | Não              | Sim         | Sim            |
+| Adicionar ou remover tabelas incluídas       | Não            | Não              | Sim         | Sim            |
+| Monitorar uma sala                           | Não            | Não              | Não         | Sim            |
+| Modificar permissões                         | Não            | Não              | Não         | Sim            |
+| Excluir a sala                               | Não            | Não              | Não         | Sim            |
+| Visualizar conversas de outros usuários      | Não            | Não              | Não         | Sim            |
+> ℹ️ *Informações adicionadas em agosto de 2025. Para mais detalhes e possíveis atualizações, consulte a [Documentação Oficial](https://learn.microsoft.com/en-us/azure/databricks/security/auth/access-control/#genie-space).*
 
-5. Defina se deseja enviar um e-mail para esses usuários informando a adição dos mesmos ao espaço Genie 
+4. Defina se deseja enviar um e-mail para esses usuários informando a adição dos mesmos ao espaço Genie
+5. Clique em `Add` para salvar as alterações
 
 # 04. Faça perguntas para o Genie
 
