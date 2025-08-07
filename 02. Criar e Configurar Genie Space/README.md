@@ -148,6 +148,8 @@ Vamos ver na prática:
 
 1. Faça a pergunta:
     - Qual o lucro projetado do AAS?
+Apesar de ter uma resposta, não está de acordo com as regras internas da empresa, por exemplo a porcentagem de lucro para produtos genéricos ou não genéricos
+- Adicione essa informação como `Request to Fix`
 
 2. Realmente, não temos informações suficientes na nossa base para responder à essa pergunta! Para isso, crie a função abaixo com a lógica do cálculo do lucro médio projetado de um produto:
 
