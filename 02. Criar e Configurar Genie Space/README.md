@@ -60,6 +60,8 @@ No menu de compartilhamento do Espaço Genie é possível adicionar usuários ou
 
 Com o Genie Space preparado, podemos começar a fazer nossas análises!
 
+<img src="../images/genie_15.png" width=600>
+
 Basta usar o chat para fazer as perguntas abaixo:
 - Qual o faturamento em out/22?
 - Agora, quebre por produto
@@ -68,8 +70,6 @@ Basta usar o chat para fazer as perguntas abaixo:
 - Qual o total de produtos vendidos em genéricos?
 - Qual o valor total vendido de ansiolíticos?
 - Quais produtos tiveram uma proporção de vendas por estoque maior que 0.8 em Outubro de 2022?
-
-<img src="../images/genie_05.png"><br><br>
 
 Note que, mesmo com muito pouco contexto, a Genie já conseguiu:
 - Inferir quais as tabelas e colunas relevantes para responder nossas perguntas
@@ -84,7 +84,7 @@ Aproveite para explorar e fazer perguntas adicionais!
 # 04. Usando Comentários
 
 Faça a seguinte pergunta:
-- Qual o valor total de venda por loja? Exiba o nome da loja
+> Qual o valor total de venda por loja? Exiba o nome da loja
 
 Note que, apesar de o Genie identificar as tabelas que utilizaria para trazer esse resultado, ele não foi capaz de responder à pergunta de forma correta. Por quê?
 
@@ -92,10 +92,16 @@ No menu `Catalog` > `<nome-do-catalogo>` > `<nome-do-schema>` > `dim_loja`, veri
 <img src="../images/genie_10.png">
 
 A coluna que contém o nome da loja não está com uma nomenclatura adequada para que o Genie consiga se basear por ela. Vamos adicionar um comentário nessa coluna para que seja possível utilizar a coluna correta para apresentar a informação pedida.
-1. Acesse o SQL Editor
+1. Acesse o `SQL Editor`
 2. Altere a tabela adicionando o comentário para a coluna **nlj**
 `ALTER TABLE dim_loja ALTER COLUMN nlj COMMENT 'Nome da loja'`
-3. Faça a pergunta **Qual o valor total de venda por loja? Exiba o nome da loja**
+
+**OU**
+
+1. Acesse a tabela via `Catalog` > `<nome-do-catalogo>` > `<nome-do-schema>` > `dim_loja` e adicione o comentário via interface
+
+Após isso faça a pergunta novamente
+> Qual o valor total de venda por loja? Exiba o nome da loja
 
 Perceba que dessa vez o Genie utilizou a coluna correta que contém o nome da loja. Documentar as tabelas com comentários é sempre uma boa prática! Isso ajuda a compreensão, a descoberta e o reaproveitamento desses dados por outras pessoas. Além disso, o Genie vai ficar bem mais inteligente.
 
@@ -105,7 +111,9 @@ No entanto, nossa consulta ainda não retornou nenhum resultado. Vamos buscar um
 
 Aparentemente, a coluna **id_loja** da tabela **dim_loja** não é o melhor campo para fazer os cruzamentos com a tabela de vendas. Na verdade, a coluna correta é a **cod**!
 
-Vamos então adicionar chaves primárias e estrangeiras nessas tabelas para que a Genie não precise inferir como fazer esse cruzamento!
+Esse é um cenário que pode acontecer facilmente no mundo real, nem sempre temos tabelas possuem colunas com informações iguais para que o Genie possa inferir os relacionamentos dessas tabelas.
+
+Vamos então adicionar chaves primárias e estrangeiras nessas tabelas para que o Genie possua mais informações de metadados para se basear!
 
 1. Use o SQL Editor para adicionar as chaves primárias e estrangeiras nas tabelas `dim_loja` e `vendas`
 
@@ -114,11 +122,13 @@ ALTER TABLE dim_loja ALTER COLUMN cod SET NOT NULL;
 ALTER TABLE dim_loja ADD CONSTRAINT pk_dim_loja PRIMARY KEY (cod);
 ALTER TABLE tb_vendas ADD CONSTRAINT fk_venda_dim_loja FOREIGN KEY (id_loja) REFERENCES dim_loja(cod);
 ```
+*Isso também pode ser feito via Interface*
+
 2. Faça novamente a pergunta anterior na Genie
 
 Pronto! Com essa informação a Genie já consegue responder a pergunta corretamente!
 
-# 05. Usando Instruções
+# 06. Usando Instruções
 
 Como vimos, a Genie utiliza toda a documentação das tabelas para conseguir responder perguntas. No entanto, por motivos de segurança, ela não tem acesso aos dados em si!
 
@@ -133,14 +143,14 @@ Por isso, para complementar o conhecimento que a Genie já possui sobre nossas b
 Vamos ver como funciona:
 
 1. Faça a pergunta:
-    - Calcule a quantidade de itens vendidos para prescrição
+> Calcule a quantidade de itens vendidos para prescrição
 
 2. Me parece que o resultado não está correto! Na nossa base, o termo prescrição realmente não é mencionado nenhuma vez. Mas acontece que aqui consideramos como medicamentos de prescrição aqueles que não são genéricos. Por isso, adicione a seguinte instrução:
     - `* para calcular indicadores sobre prescrição use categoria_regulatoria <> 'GENÉRICO'`
 
 <img src="../images/genie_11.png">
 
-# 05. Usando Exemplos de Query
+# 07. Usando Exemplos de Query
 
 Em alguns casos, precisamos fazer cruzamentos e cálculos bastante complexos para conseguir responder às nossas perguntas e a Genie pode não entender como montar todo o racional necessário.
 
@@ -149,7 +159,7 @@ Nesses casos, podemos fornecer exemplos de queries validadas e certificadas pelo
 Vamos ver como funciona:
 
 1. Faça a pergunta:
-    - Calcule a quantidade de itens vendidos por janela móvel de 3 meses 
+> Calcule a quantidade de itens vendidos por janela móvel de 3 meses 
 
 2. Aqui a Genie já até fez uma soma em janela móvel, porém não ficou exatamente do jeito que nós gostaríamos. Então, adicione um exemplo de query seguindo os passos abaixo:
     - Clique em `Configure` > `SQL Queries`
@@ -158,11 +168,11 @@ Vamos ver como funciona:
     - Insira a query abaixo no campo inferior
         - `SELECT window.end AS dt_venda, SUM(vl_venda) FROM vendas GROUP BY WINDOW(dt_venda, '90 days', '1 day')`
 
-<img src="../images/genie_08.png">
+<img src="../images/genie_12.png">
 
 3. Faça novamente a pergunta anterior
 
-Notem que agora a Genie conseguiu responder corretamente a nossa pergunta!
+Notem que agora a Genie conseguiu responder bem melhor a nossa pergunta!
 
 4. Também é possível usar parâmetros nas queries criadas
 ```sql
@@ -175,7 +185,7 @@ ORDER BY mes;
 ```
 Utilize a pergunta `Quero ver as vendas mensais da loja 34006` para montar a query
 
-# 06. Usando Funções
+# 07. Usando Funções
 Outro recurso que podemos utilizar para ajudar a Genie com cálculos complexos são as funções!
 
 **Funções** permitem guardarmos e parametrizar lógicas complexas dentro do nosso catálogo para serem reutilizadas por outras pessoas e/ou outras consultas de forma simples – inclusive fora da Genie. 
