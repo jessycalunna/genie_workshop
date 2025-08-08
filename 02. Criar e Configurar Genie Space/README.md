@@ -7,11 +7,11 @@
 <img src="../images/genie_01.png"><br><br>
 
 2. Selecione as tabelas criadas
-        - tb_vendas
-        - tb_estoque
-        - dim_medicamento
-        - dim_loja
-3. Clique em `Create`
+   - tb_vendas
+   - tb_estoque
+   - dim_medicamento
+   - dim_loja
+4. Clique em `Create`
 
 <img src="../images/genie_16.png" width=400>
 
