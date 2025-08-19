@@ -1,4 +1,4 @@
-<img src="../images/header.jpg">
+<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/header.jpg">
 
 # 01. Criar o Genie Space
 
@@ -13,13 +13,13 @@
    - dim_loja
 4. Clique em `Create`
 
-<img src="../images/genie_16.png" width=400>
+<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/genie_16.png" width=400>
 
 # 02. Configure o Genie
 
 No menu de configurações do Genie temos várias opções, abaixo detalho um pouco do que pode ser feito *(opcional)*.
 
-<img src="../images/genie_17.png" width=800>
+<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/genie_17.png" width=800>
 
 1. Escolha um nome apropriado para a sua sala Genie  
    Defina um nome que reflita com precisão o objetivo ou o conteúdo da sala.
@@ -34,7 +34,7 @@ No menu de configurações do Genie temos várias opções, abaixo detalho um po
 # 03. Permissões da Sala Genie
 
 No menu de compartilhamento do Espaço Genie é possível adicionar usuários ou grupos e definir permissões com os seguintes passos:
-<img src="../images/genie_18.png" width=400>
+<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/genie_18.png" width=400>
 1. Clique em `Share`
 2. Adicione usuários/grupos
 3. Defina qual tipo de permissão esse usuário terá, elas são:
@@ -60,7 +60,7 @@ No menu de compartilhamento do Espaço Genie é possível adicionar usuários ou
 
 Com o Genie Space preparado, podemos começar a fazer nossas análises!
 
-<img src="../images/genie_15.png" width=600>
+<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/genie_15.png" width=600>
 
 Basta usar o chat para fazer as perguntas abaixo:
 - Qual o faturamento em out/22?
@@ -89,7 +89,7 @@ Faça a seguinte pergunta:
 Note que, apesar de o Genie identificar as tabelas que utilizaria para trazer esse resultado, ele não foi capaz de responder à pergunta de forma correta. Por quê?
 
 No menu `Catalog` > `<nome-do-catalogo>` > `<nome-do-schema>` > `dim_loja`, verifique o nome da coluna que apresenta o nome da loja
-<img src="../images/genie_10.png" width=300>
+<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/genie_10.png" width=300>
 
 A coluna que contém o nome da loja não está com uma nomenclatura adequada para que o Genie consiga se basear por ela. Vamos adicionar um comentário nessa coluna para que seja possível utilizar a coluna correta para apresentar a informação pedida.
 1. Acesse o `SQL Editor`
@@ -148,7 +148,7 @@ Vamos ver como funciona:
 2. Me parece que o resultado não está correto! Na nossa base, o termo prescrição realmente não é mencionado nenhuma vez. Mas acontece que aqui consideramos como medicamentos de prescrição aqueles que não são genéricos. Por isso, adicione a seguinte instrução:
     - `* para calcular indicadores sobre prescrição use categoria_regulatoria <> 'GENÉRICO'`
 
-<img src="../images/genie_11.png">
+<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/genie_11.png">
 
 # 08. Usando Exemplos de Query
 
@@ -170,7 +170,7 @@ Vamos ver como funciona:
 SELECT window.end AS dt_venda, SUM(vl_venda) FROM vendas GROUP BY WINDOW(dt_venda, '90 days', '1 day')
 ```
 
-<img src="../images/genie_12.png">
+<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/genie_12.png">
 
 3. Faça novamente a pergunta anterior
 
@@ -197,7 +197,7 @@ ORDER BY mes;
 3. O parâmetro será automaticamente detectado pelo Genie  - O valor (`34006`, no exemplo acima) será extraído da pergunta e aplicado na consulta. Ele também aparecerá na interface de configuração, podendo ser ajustado conforme necessário.
 4. Também é possível complementar a instrução de Query `Usage Guidance`. Esse campo permite adicionar explicações e exemplos adicionais que ajudam o Genie a entender **em quais outros contextos** a instrução pode ser aplicada. Você pode incluir variações de perguntas, termos equivalentes ou observações úteis para melhorar a precisão da resposta gerada.
 
-<img src="../images/genie_19.png">
+<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/genie_19.png">
 
 # 09. Usando Funções
 
@@ -233,10 +233,10 @@ CREATE OR REPLACE FUNCTION calc_lucro(medicamento STRING)
 ## 09.2. Adicionando a função ao Genie
 
 1. No menu `SQL Queries`, clique em `Add` > `SQL Function`
-<img src="../images/genie_13.png" width=400>
+<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/genie_13.png" width=400>
 
 3. Selecione a função recém-criada `calc_lucro`
-<img src="../images/genie_14.png" width=400>
+<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/genie_14.png" width=400>
 
 5. Faça novamente a pergunta ao Genie:
 > Qual o lucro projetado do AAS?
@@ -247,7 +247,7 @@ Perceba que agora o Genie foi capaz de utilizar a função `calc_lucro` e respon
 
 Durante toda a interação com o espaço Genie, você deve ter percebido que, logo abaixo de cada resposta gerada, aparecem as opções: `Yes`, `Fix It` e `Request Review`.
 
-<img src="../images/genie_20.png">
+<img src="https://raw.githubusercontent.com/jessycalunna/genie_workshop/main/images/genie_20.png">
 
 Essas opções são fundamentais para o processo de **melhoria contínua do espaço Genie**. Elas permitem que os usuários forneçam feedbacks valiosos e que os administradores acompanhem, ajustem e otimizem as instruções e respostas geradas.
 
